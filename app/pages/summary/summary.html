@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar primary>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+        நிசப்தம்
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="home">
+    <ion-refresher (ionRefresh)="reloadEntries($event)" padding-top padding-bottom>
+        <ion-refresher-content pullingIcon="arrow-down"
+                               pullingText="புதுப்பிக்க இழு"
+                               refreshingSpinner="crescent"
+                               refreshingText="பதிவுகளை ஏற்றுகிறது">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card *ngFor="let entry of entries" id="{{ entry.id.$t }}">
+        <ion-item>
+            <h2><strong>{{ entry.title.$t }}</strong></h2>
+            <p>{{ formatDate(entry.published.$t) }}</p>
+        </ion-item>
+        <img src="{{ imageUrl(entry.media$thumbnail.url) }}" *ngIf="entry.media$thumbnail" />
+        <ion-card-content>
+            <p>{{ entry.summary.$t }}</p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <button block primary clear small (click)="loadCommentsPage(entry.id.$t)">
+                    <ion-icon name="text"></ion-icon>
+                    <div *ngIf="entry.thr$total">{{ entry.thr$total.$t }} எதிர் சப்தங்கள்</div>
+                    <div *ngIf="!entry.thr$total">0 எதிர் சப்தங்கள்</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button block primary clear small (click)="loadPostPage(entry)">
+                    <ion-icon name="book"></ion-icon>
+                    <div>மேலும் படிக்க</div>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+    <ion-infinite-scroll (ionInfinite)="updateEntriesByCategory($event)" *ngIf="!endLoading">
+        <ion-infinite-scroll-content loadingSpinner="crescent"
+                                     loadingText="மேலும் பதிவுகளை ஏற்றுகிறது">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

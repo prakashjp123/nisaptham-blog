@@ -1,0 +1,33 @@
+﻿<ion-header>
+    <ion-navbar primary>
+        <ion-title>
+            நிசப்தம்
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content no-padding>
+    <ion-card *ngIf="post">
+        <ion-item>
+            <h2><strong>{{ post.title.$t }}</strong></h2>
+            <p>{{ formatDate(post.published.$t) }}</p>
+        </ion-item>
+        <ion-card-content>
+            <p [innerHTML]="postContent"></p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <button block primary clear small (click)="loadCommentsPage(post.id.$t)">
+                    <ion-icon name="text"></ion-icon>
+                    <div *ngIf="post.thr$total">{{ post.thr$total.$t }} எதிர் சப்தங்கள்</div>
+                    <div *ngIf="!post.thr$total">0 எதிர் சப்தங்கள்</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button block primary clear small>
+                    <ion-icon name="share"></ion-icon>
+                    <div>பகிர்</div>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+</ion-content>

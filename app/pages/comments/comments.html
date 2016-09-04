@@ -1,0 +1,17 @@
+<ion-content>
+    <ion-item *ngIf="comments && comments.length == 0">
+        <p>எதிர் சப்தங்கள் ஏதும் இல்லை</p>
+    </ion-item>
+    <ion-list>
+        <ion-item *ngFor="let comment of comments" id="{{ comment.id.$t }}" text-wrap>
+            <h2><strong>{{ comment.author[0].name.$t }}</strong></h2>
+            <p>{{ formatDate(comment.published.$t) }}</p>
+            <p [innerHTML]="comment.content.$t"></p>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="updateComments($event)" *ngIf="!endLoading">
+        <ion-infinite-scroll-content loadingSpinner="crescent"
+                                     loadingText="மேலும் எதிர் சப்தங்களை ஏற்றுகிறது">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
