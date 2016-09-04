@@ -1,26 +1,36 @@
-This is a starter template for [Ionic 2](http://ionicframework.com/docs/v2/) projects.
+## Nisaptham Blog Reader
 
-## How to use this template
+Nisaptham blog reader application built using [Ionic 2](http://ionicframework.com/docs/v2/).
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/driftyco/ionic2-app-base).
+## Requirements
+* Node >= 6.0.0 and NPM >= 3.10.0
+* Apache Cordova
+* Android SDK for Android App
+* iOS SDK for iOS App
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/driftyco/ionic2-app-base).
-
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
+## How to download this project
 ```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs --v2
+$ git clone https://github.com/prakashjp123/nisaptham-blog.git
 ```
 
-Then, to run it, cd into `myTabs` and run:
+## How to build this application
 
+Use the following command to build the application.
+
+Install ionic-cli and cordova
 ```bash
-$ ionic platform add ios
-$ ionic run ios
+$ sudo npm install -g ionic@beta cordova
+$ cd nisaptham-blog
+$ npm install
 ```
 
-Substitute ios for android if not on a Mac.
+## How to run this application
 
+Use the following command to build the application.
+
+```bash
+$ ionic platform add android
+$ ionic run android
+```
+
+Substitute android for ios to build ios application.
