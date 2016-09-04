@@ -25,7 +25,7 @@ import {FeedService} from './service/FeedService';
         <ion-nav #menuContent [root]="rootPage"></ion-nav>`,
     providers: [ FeedService ]
 })
-export class MyApp {
+export class NisapthamApp {
     @ViewChild('menuContent') navController: NavController;
     private rootPage: any = SummaryPage;
     private postPage: any = PostPage;
@@ -52,4 +52,6 @@ export class MyApp {
 
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(NisapthamApp, null, {
+    'backButtonText': 'பின் செல்'
+});
