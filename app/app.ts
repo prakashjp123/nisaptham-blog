@@ -53,5 +53,9 @@ export class NisapthamApp {
 }
 
 ionicBootstrap(NisapthamApp, null, {
-    'backButtonText': 'பின் செல்'
+    'platforms': {
+        'ios': {
+            'backButtonText': 'பின் செல்'
+        }
+    }
 });

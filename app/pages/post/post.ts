@@ -32,7 +32,7 @@ export class PostPage implements OnInit {
     formatDate(dateString: string): string {
         var date = moment(dateString);
         if (date.isValid()) {
-            if (moment(new Date().toString()).diff(date, 'days') >= 7) {
+            if (moment(new Date().getTime()).diff(date, 'days') >= 7) {
                 return date.format('MMM D, YYYY');
             }
             return date.fromNow();
