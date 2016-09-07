@@ -37,13 +37,13 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
+    "cordova-plugin-x-socialsharing",
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [ ],
   "scripts": {
     "build": "node_modules/.bin/gulp build",
     "typings": "node_modules/.bin/typings install",
-    "fonts": "gfdownloader Catamaran:100,200,300,400,500,600,700,800,900 node_modules/google-fonts/catamaran",
     "postinstall": "npm run typings && npm run build"
   }
 }
