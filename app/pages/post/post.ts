@@ -1,6 +1,7 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {DomSanitizationService, SafeHtml} from '@angular/platform-browser';
 import {NavController, NavParams} from 'ionic-angular';
+import {SocialSharing} from 'ionic-native';
 import {FeedService} from '../../service/FeedService';
 import {CommentsPage} from '../comments/comments';
 import * as moment from 'moment';
@@ -52,6 +53,10 @@ export class PostPage implements OnInit {
     loadCommentsPage(postId: string) {
         let id: string = postId.substr(postId.lastIndexOf('-') + 1);
         this.navController.push(this.commentsPage, { postId: id });
+    }
+
+    shareExternal(post: Object) {
+        SocialSharing.share("Click to read more.", post["title"]["$t"], null, this.postUrl);
     }
 
 }
