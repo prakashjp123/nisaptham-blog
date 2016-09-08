@@ -1,8 +1,15 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            எதிர் சப்தங்கள்
+        </ion-title>
+    </ion-navbar>
+</ion-header>
 <ion-content>
-    <ion-item *ngIf="comments && comments.length == 0">
-        <p>எதிர் சப்தங்கள் ஏதும் இல்லை</p>
-    </ion-item>
     <ion-list>
+        <ion-item *ngIf="comments && comments.length == 0">
+            <p>எதிர் சப்தங்கள் ஏதும் இல்லை</p>
+        </ion-item>
         <ion-item *ngFor="let comment of comments" id="{{ comment.id.$t }}" text-wrap>
             <h2><strong>{{ comment.author[0].name.$t }}</strong></h2>
             <p>{{ formatDate(comment.published.$t) }}</p>
