@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {Network} from 'ionic-native';
 import {FeedService} from '../../service/FeedService';
 import {CommentsPage} from '../comments/comments';
 import {PostPage} from '../post/post';
@@ -19,6 +20,7 @@ export class SummaryPage implements OnInit {
 
     constructor(private navController: NavController,
         private navParams: NavParams,
+        private alertController: AlertController,
         private feedService: FeedService) {
         this.commentsPage = CommentsPage;
         this.postPage = PostPage;
@@ -27,6 +29,21 @@ export class SummaryPage implements OnInit {
 
     ngOnInit() {
         this.loadEntriesByCategory();
+    }
+
+    checkInternet() {
+        console.log(Network.connection);
+        if (Network.connection != 'none') {
+            return true;
+        } else {
+            let alert = this.alertController.create({
+                subTitle: 'இணைக்க முடியவில்லை',
+                message: 'நீங்கள் இணையத்துடன் இணைப்பில் இல்லை. இணைப்பை சரிபார்த்து மீண்டும் முயற்சிக்கவும்.',
+                buttons: ['சரி']
+            });
+            alert.present();
+            return false;
+        }
     }
 
     imageUrl(url: string): string {
@@ -51,6 +68,12 @@ export class SummaryPage implements OnInit {
     }
 
     loadEntriesByCategory(refresher?: any) {
+        if (!this.checkInternet()) {
+            if (refresher)
+                refresher.complete();
+            return;
+        }
+
         this.nextSet = 1;
         this.feedService.getEntriesByCategoryRemote(this.category, 1)
             .subscribe(entries => {
@@ -63,6 +86,12 @@ export class SummaryPage implements OnInit {
     }
 
     updateEntriesByCategory(infiniteScroll?: any) {
+        if (!this.checkInternet()) {
+            if (infiniteScroll)
+                infiniteScroll.complete();
+            return;
+        }
+
         this.feedService.getEntriesByCategoryRemote(this.category, this.nextSet)
             .subscribe(entries => {
                 this.entries = this.entries.concat(entries);
